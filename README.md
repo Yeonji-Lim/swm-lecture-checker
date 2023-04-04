@@ -18,6 +18,8 @@ cd SWM_Lecture_Checker
 pip install -r requirements.txt
 ```
 
+`info.json`을 맞는 값으로 채워주세요
+
 컴퓨터 종료 전까지 실행
 
 ```sh
