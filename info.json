@@ -1,0 +1,7 @@
+{
+    "DISCORD_WEBHOOK_URL": "디스코드 웹훅 url",
+    "LOGIN_INFO": {
+        "username": "소마계정아이디",
+        "password": "소마계정비번"
+    }
+}   
