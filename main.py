@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import schedule
 import time
+from datetime import datetime
 
 recent_lec = ''
 
@@ -39,15 +40,23 @@ def job():
             if mentolec_page.ok:
                 soup = bs(mentolec_page.text, 'html.parser')
                 new_lec = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').attrs['href']
+                new_lec_name = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').get_text()
                 if recent_lec != '':
                     if new_lec != recent_lec:
                         recent_lec = new_lec
-                        message = {'content':'소마에 새로운 강의가 올라왔습니다!!'}
+                        message = {'content': ' '.join(['NEW 소마 강의:', 
+                                                    new_lec_name,
+                                                    datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
                         requests.post(DISCORD_WEBHOOK_URL, data=message)
                 else:
                     recent_lec = new_lec
+                    message = {'content': ' '.join(['최근 소마 강의:', 
+                                                    new_lec_name,
+                                                    datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
+                    requests.post(DISCORD_WEBHOOK_URL, data=message)
 
-schedule.every(3).minutes.do(job)
+job()
+schedule.every(1).minutes.do(job)
 
 while True:
     schedule.run_pending()
