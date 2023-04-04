@@ -41,18 +41,11 @@ def job():
                 soup = bs(mentolec_page.text, 'html.parser')
                 new_lec = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').attrs['href']
                 new_lec_name = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').get_text()
-                if recent_lec != '':
-                    if new_lec != recent_lec:
-                        recent_lec = new_lec
-                        message = {'content': ' '.join(['NEW 소마 강의:', 
-                                                    new_lec_name,
-                                                    datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
-                        requests.post(DISCORD_WEBHOOK_URL, data=message)
-                else:
+                if new_lec != recent_lec:
                     recent_lec = new_lec
-                    message = {'content': ' '.join(['최근 소마 강의:', 
-                                                    new_lec_name,
-                                                    datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
+                    message = {'content': ' '.join(['NEW 소마 강의:', 
+                                                new_lec_name,
+                                                datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
                     requests.post(DISCORD_WEBHOOK_URL, data=message)
 
 job()
