@@ -16,13 +16,13 @@ def job():
         LOGIN_INFO = json_data['LOGIN_INFO']
         DISCORD_WEBHOOK_URL = json_data['DISCORD_WEBHOOK_URL']
 
-        login_res = s.get('https://www.swmaestro.org/sw/member/user/forLogin.do?menuNo=200025')
+        login_res = s.get('https://www.swmaestro.org/sw/member/user/forLogin.do?menuNo=200025', verify=False)
         soup = bs(login_res.text, 'html.parser')
         csrf = soup.find('input', {'name': 'csrfToken'})
         print('CSRF : ', csrf['value'])
 
         LOGIN_INFO = {**LOGIN_INFO, **{'csrfToken': csrf['value']}}
-        login_res = s.post('https://www.swmaestro.org/sw/member/user/toLogin.do', data=LOGIN_INFO)
+        login_res = s.post('https://www.swmaestro.org/sw/member/user/toLogin.do', data=LOGIN_INFO, verify=False)
         soup = bs(login_res.text, 'html.parser')
         password = soup.find('input', {'name': 'password'})
         print('암호화 된 비밀번호 : ', password['value'])
@@ -31,7 +31,7 @@ def job():
             'password' : password['value'],
             'username' : LOGIN_INFO['username']
         }
-        login_res = s.post('https://www.swmaestro.org/sw/login.do', data=LOGIN_INFO)
+        login_res = s.post('https://www.swmaestro.org/sw/login.do', data=LOGIN_INFO, verify=False)
         print('로그인 요청 결과 : ', login_res.status_code)
 
         if login_res.ok:
@@ -46,7 +46,7 @@ def job():
                     message = {'content': ' '.join(['NEW 소마 강의:', 
                                                 new_lec_name,
                                                 datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
-                    requests.post(DISCORD_WEBHOOK_URL, data=message)
+                    requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
 
 job()
 schedule.every(1).minutes.do(job)
