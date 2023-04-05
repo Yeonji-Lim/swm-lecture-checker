@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup as bs
 import schedule
 import time
 from datetime import datetime
+import warnings
+warnings.filterwarnings('ignore')
 
 recent_lec = ''
 
