@@ -1,6 +1,6 @@
-# SWM_Lecture_Checker
+# swm-lecture-checker
 
-SWM 멘토링 게시판의 새로운 멘토특강 알림봇
+SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 
 누구보다 빠르게 멘토특강을 신청하고 싶어서 만들었습니다.
 
