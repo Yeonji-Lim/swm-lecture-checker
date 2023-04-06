@@ -13,7 +13,8 @@ def job():
     global recent_lec
     with requests.Session() as s:
 
-        print('최근 강의 : ', recent_lec)
+        if recent_lec:
+            print('이전 최근 강의 : ', recent_lec)
         json_data = json.load(open('info.json', 'r'))
         LOGIN_INFO = json_data['LOGIN_INFO']
         DISCORD_WEBHOOK_URL = json_data['DISCORD_WEBHOOK_URL']
@@ -45,9 +46,9 @@ def job():
                 new_lec_name = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').get_text()
                 if new_lec != recent_lec:
                     recent_lec = new_lec
-                    message = {'content': ' '.join(['NEW 소마 강의:', 
+                    message = {'content': ''.join(['NEW 소마 강의: ', 
                                                 new_lec_name,
-                                                datetime.today().strftime('%Y/%m/%d %H:%M:%S')]) }
+                                                '\n 바로가기: https://www.swmaestro.org', new_lec]) }
                     requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
 
 job()
