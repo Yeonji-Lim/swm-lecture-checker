@@ -229,3 +229,6 @@ pyrightconfig.json
 
 # Virtual Environment
 slc_env/*
+
+# Secret
+info.json
