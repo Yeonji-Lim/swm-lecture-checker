@@ -10,27 +10,37 @@ SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 
 크롤링은 잘 안해봐서 이런저런 공부와 함께 개발 해보았습니다.
 
-## 사용하기
+3분마다 소마 특강 페이지 훑어보고 목록에 변화가 있으면 제일 최근 강의를 바로가기 링크와 함께 알려줍니다!
 
-```sh
-git clone https://github.com/Yeonji-Lim/SWM_Lecture_Checker.git
-cd SWM_Lecture_Checker
-pip install -r requirements.txt
-```
+<img width="1036" alt="image" src="https://user-images.githubusercontent.com/57888020/230312657-54a1a3ca-99c3-4989-885f-0de85301ca43.png">
 
-`info.json`을 맞는 값으로 채워주세요
+요청이 있으면 새로운 강의 목록을 알려주는 것으로 바꿔보겠습니다
 
-컴퓨터 종료 전까지 실행
+## Quick Start
 
-```sh
-python3 main.py
-```
+- clone 및 패키지 설치
+    ```sh
+    git clone https://github.com/Yeonji-Lim/SWM_Lecture_Checker.git
+    cd SWM_Lecture_Checker
+    pip install -r requirements.txt
+    ```
 
-그런데 이렇게 되면 개인 PC가 켜져있는 동안 이 파일을 실행시켜야만 알림을 주게 되므로, 
+- `info.json`을 맞는 값으로 채워주세요
 
-따로 서버에 등록해서 사용하시는 것이 좋습니다.
+    [디스코드 웹훅 URL 참고](https://support.discord.com/hc/ko/articles/228383668-%EC%9B%B9%ED%9B%85%EC%9D%84-%EC%86%8C%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4)
 
-## 개발 과정
+- PC 종료 전까지 실행하기
+    ```sh
+    python3 main.py
+    ```
+
+    그런데 이렇게 되면 개인 PC가 켜져있는 동안 이 파일을 실행시켜야만 알림을 주게 되므로, 
+
+    따로 서버에 등록해서 사용하시는 것이 좋습니다.
+---
+<details>
+<summary>개발 과정 보기</summary>
+
 ### 로그인 분석하기
 
 이 부분은 공부의 차원에서 적습니다.
@@ -107,4 +117,4 @@ with requests.Session() as s:
 
 [이 페이지](https://coffee4m.com/%EB%94%94%EC%8A%A4%EC%BD%94%EB%93%9C-%EB%A9%94%EC%8B%A0%EC%A0%80-%EC%95%8C%EB%A6%BC-%EB%B4%87/)를 참고하였습니다.
 
-
+</details>
