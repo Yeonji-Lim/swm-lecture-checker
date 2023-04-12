@@ -20,8 +20,8 @@ SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 
 - clone 및 패키지 설치
     ```sh
-    git clone https://github.com/Yeonji-Lim/SWM_Lecture_Checker.git
-    cd SWM_Lecture_Checker
+    git clone https://github.com/Yeonji-Lim/swm-lecture-checker.git
+    cd swm-lecture-checker
     pip install -r requirements.txt
     ```
 
