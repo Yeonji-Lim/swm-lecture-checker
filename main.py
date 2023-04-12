@@ -9,6 +9,7 @@ warnings.filterwarnings('ignore')
 
 recent_lec = ''
 target_mento = []
+recent_mento_lec = []
 
 def job():
     global recent_lec
@@ -46,7 +47,8 @@ def job():
                     soup = bs(mentolec_page.text, 'html.parser')
                     mentolecs = soup.select('#listFrm > table > tbody > tr > td.tit > div.rel')
                     for mentolec in mentolecs:
-                        if mentolec.find('div').text.strip() != '[마감]':
+                        if mentolec.find('div').text.strip() != '[마감]' and not mentolec.find('a')['href'] in recent_mento_lec:
+                            recent_mento_lec.append(mentolec.find('a')['href'])
                             message = {'content': ''.join(['[[긴급]] ', mento, ' 멘토님 강의 : ',
                                                 mentolec.find('a').text.strip(),
                                                 '\n바로가기 : https://www.swmaestro.org', mentolec.find('a')['href']]) }
