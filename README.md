@@ -41,9 +41,9 @@ SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 ### 특정 멘토님 강의 체크하기
 
 - main.py 내의 target_mento list에 멘토님 이름을 적은 후 실행합니다.
-```python
-target_mento = ['임연지', '이종범']
-```
+    ```python
+    target_mento = ['임연지', '이종범']
+    ```
 
 ---
 <details>
