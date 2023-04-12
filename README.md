@@ -12,7 +12,7 @@ SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 
 3분마다 소마 특강 페이지 훑어보고 목록에 변화가 있으면 제일 최근 강의를 바로가기 링크와 함께 알려줍니다!
 
-<img width="1036" alt="image" src="https://user-images.githubusercontent.com/57888020/230312657-54a1a3ca-99c3-4989-885f-0de85301ca43.png">
+<img width="975" alt="image" src="https://user-images.githubusercontent.com/57888020/231365627-9bcc5768-47b0-40cd-b845-80cd3effa426.png">
 
 요청이 있으면 새로운 강의 목록을 알려주는 것으로 바꿔보겠습니다
 
@@ -20,8 +20,8 @@ SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 
 - clone 및 패키지 설치
     ```sh
-    git clone https://github.com/Yeonji-Lim/SWM_Lecture_Checker.git
-    cd SWM_Lecture_Checker
+    git clone https://github.com/Yeonji-Lim/swm-lecture-checker.git
+    cd swm-lecture-checker
     pip install -r requirements.txt
     ```
 
@@ -41,9 +41,9 @@ SWM 멘토링 게시판의 새로운 멘토특강 알림봇 (Discord)
 ### 특정 멘토님 강의 체크하기
 
 - main.py 내의 target_mento list에 멘토님 이름을 적은 후 실행합니다.
-```python
-target_mento = ['임연지', '이종범']
-```
+    ```python
+    target_mento = ['임연지', '이종범']
+    ```
 
 ---
 <details>
