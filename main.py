@@ -15,8 +15,6 @@ def job():
     global recent_lec
     with requests.Session() as s:
 
-        if recent_lec:
-            print('이전 최근 강의 : ', recent_lec)
         json_data = json.load(open('info.json', 'r'))
         LOGIN_INFO = json_data['LOGIN_INFO']
         DISCORD_WEBHOOK_URL = json_data['DISCORD_WEBHOOK_URL']
@@ -49,7 +47,7 @@ def job():
                     for mentolec in mentolecs:
                         if mentolec.find('div').text.strip() != '[마감]' and not mentolec.find('a')['href'] in recent_mento_lec:
                             recent_mento_lec.append(mentolec.find('a')['href'])
-                            message = {'content': ''.join(['[[긴급]] ', mento, ' 멘토님 강의 : ',
+                            message = {'content': ''.join(['[[긴급]] ', mento, ' 멘토님 : ',
                                                 mentolec.find('a').text.strip(),
                                                 '\n바로가기 : https://www.swmaestro.org', mentolec.find('a')['href']]) }
                             requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
@@ -60,12 +58,14 @@ def job():
                 soup = bs(mentolec_page.text, 'html.parser')
                 new_lec = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').attrs['href']
                 new_lec_name = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').get_text().strip()
-                if new_lec != recent_lec:
-                    recent_lec = new_lec
+                if not recent_lec:
+                    message = {'content': '알림봇 시작!'}
+                elif new_lec != recent_lec:
                     message = {'content': ''.join(['NEW 소마 강의 : ', 
                                                 new_lec_name,
                                                 '\n바로가기 : https://www.swmaestro.org', new_lec]) }
-                    requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
+                requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
+                recent_lec = new_lec
 
 job()
 schedule.every(1).minutes.do(job)
