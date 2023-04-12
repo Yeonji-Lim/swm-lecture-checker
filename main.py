@@ -39,19 +39,18 @@ def job():
         print('로그인 요청 결과 : ', login_res.status_code)
 
         if login_res.ok:
-            if target_mento:
-                for mento in target_mento:
-                    mentolec_page = s.get('https://www.swmaestro.org/sw/mypage/mentoLec/list.do?menuNo=200046&searchCnd=2&searchWrd='+mento)
-                    print(mento, '멘토님 검색 결과 : ', mentolec_page.status_code)
-                    if mentolec_page.ok:
-                        soup = bs(mentolec_page.text, 'html.parser')
-                        mentolecs = soup.select('#listFrm > table > tbody > tr > td.tit > div.rel')
-                        for mentolec in mentolecs:
-                            if mentolec.find('div').text.strip() != '[마감]':
-                                message = {'content': ''.join(['[[긴급]] ', mento, ' 멘토님 강의 : ',
-                                                    mentolec.find('a').text.strip(),
-                                                    '\n바로가기 : https://www.swmaestro.org', mentolec.find('a')['href']]) }
-                                requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
+            for mento in target_mento:
+                mentolec_page = s.get('https://www.swmaestro.org/sw/mypage/mentoLec/list.do?menuNo=200046&searchCnd=2&searchWrd='+mento)
+                print(mento, '멘토님 검색 결과 : ', mentolec_page.status_code)
+                if mentolec_page.ok:
+                    soup = bs(mentolec_page.text, 'html.parser')
+                    mentolecs = soup.select('#listFrm > table > tbody > tr > td.tit > div.rel')
+                    for mentolec in mentolecs:
+                        if mentolec.find('div').text.strip() != '[마감]':
+                            message = {'content': ''.join(['[[긴급]] ', mento, ' 멘토님 강의 : ',
+                                                mentolec.find('a').text.strip(),
+                                                '\n바로가기 : https://www.swmaestro.org', mentolec.find('a')['href']]) }
+                            requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
 
             mentolec_page = s.get('https://www.swmaestro.org/sw/mypage/mentoLec/list.do?menuNo=200046', verify=False)
             print('멘토링 페이지 접근 결과 : ', mentolec_page.status_code)
