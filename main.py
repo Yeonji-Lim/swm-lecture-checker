@@ -58,13 +58,15 @@ def job():
                 soup = bs(mentolec_page.text, 'html.parser')
                 new_lec = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').attrs['href']
                 new_lec_name = soup.select_one('#listFrm > table > tbody > tr:nth-child(1) > td.tit > div.rel > a').get_text().strip()
+                message = {}
                 if not recent_lec:
                     message = {'content': '알림봇 시작!'}
                 elif new_lec != recent_lec:
                     message = {'content': ''.join(['NEW 소마 강의 : ', 
                                                 new_lec_name,
                                                 '\n바로가기 : https://www.swmaestro.org', new_lec]) }
-                requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
+                if 'content' in message:
+                    requests.post(DISCORD_WEBHOOK_URL, data=message, verify=False)
                 recent_lec = new_lec
 
 job()
